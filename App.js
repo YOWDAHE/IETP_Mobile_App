@@ -2,20 +2,29 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Login from './src/screens/Login';
 import Home from './src/screens/Home';
+import AppContainer from './src/screens/AppContainer';
 
 export default function App() {
 
   const Stack = createNativeStackNavigator();
+  const Tab = createBottomTabNavigator();
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Login" component={Login} options={{ animation:"slide_from_right" }} />
-        <Stack.Screen name="Home" component={Home} options={{ animation: "slide_from_left" }} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <>
+      <StatusBar style='light' />
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Login" component={Login} options={{ animation: "slide_from_right" }} />
+          <Stack.Screen name="Home" component={AppContainer} options={{
+            animation: "slide_from_left",
+            headerShown: false,
+          }} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </>
   );
 }
 
