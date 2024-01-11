@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "IETP_Mobile_App",
-    "slug": "IETP_Mobile_App",
+    "name": "Smart Farm",
+    "slug": "Smart_Farm",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

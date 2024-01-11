@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Login from './src/screens/Login';
 import Home from './src/screens/Home';
 import AppContainer from './src/screens/AppContainer';
+import Temputature from './src/screens/Temputature';
 
 export default function App() {
 
