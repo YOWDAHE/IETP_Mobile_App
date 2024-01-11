@@ -1,13 +1,20 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-// import Login from './src/screens/login';
-import Threshold from './src/screens/thresholdInterface';
+import { useNavigation } from '@react-navigation/native';
+import Navigation from './src/components/Navigation';
 
 export default function App() {
+
+    
+
   return (
     <View style={styles.container}>
       {/* <Login /> */}
+      {/* <TryRoute /> */}
       {/* <Threshold /> */}
+      
+
+      <Navigation />
       <StatusBar style="auto" />
     </View>
   );

@@ -1,12 +1,18 @@
 import {View, Text, Modal, TextInput, TouchableOpacity, Alert} from "react-native"
 import { useState, useEffect } from "react"
+import { useNavigation } from "@react-navigation/native"
+
+import Icon from "react-native-vector-icons/FontAwesome"
 
 import CustomButton from '../components/CustomButton'
 
 
 export default function SignUpForm({style, isVisible, setVisible}){    
+
+  const navigation = useNavigation()
   
-  const [isValid, setValid] = useState(false)
+  const [show, setShow] = useState(true)
+  const [cshow, setcShow] = useState(true)
   const [data, setData] = useState({})
   const [email, setEmail] = useState('')
   const [password, setPassWord] = useState('')
@@ -17,11 +23,39 @@ export default function SignUpForm({style, isVisible, setVisible}){
 
     if (emailPattern.test(email)){
       Alert.alert('valid email')
-      setValid(true)
+      return true
     } else {
+      console.log(email)
       Alert.alert("invalid email")
+      return False
     }
 
+  }
+
+
+  const validatePassword = () => {
+    const passwordPattern = /^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8,}$/
+
+    if (!passwordPattern.test(password)){
+      Alert.alert("Invalid Password, Try again")
+      return false
+    }
+
+    if (password !== confirm_password){
+      Alert.alert("Passwords do not match, Please confirm it again")
+      return false
+    }
+
+    return true
+  }
+
+  const handleSubmit = () => {
+      
+      if (validatePassword() && validateEmail()){
+        setData({email, password}) 
+        navigation.navigate('threshold')
+      }
+                  
   }
 
   useEffect(() => {
@@ -48,38 +82,59 @@ export default function SignUpForm({style, isVisible, setVisible}){
                 <TextInput  
                     placeholder="Email" 
                     style = {style.input}
-                    onChangeText={(text) => {
-                      isValid ? setEmail(text) : setEmail('')
+                    onChangeText={(text) => {setEmail(text) 
                     }}
 
                     
                   />
-                <TextInput 
+                <View style = {{display : 'flex', flexDirection: 'row', justifyContent : 'space-between'}}>
+                  
+                  <TextInput 
                     placeholder = "Password" 
-                    secureTextEntry = {true} 
+                    secureTextEntry = {show} 
                     style = {style.input}
                     onChangeText={(text) => {
-                      {text !== "" ? setPassWord(text) : console.log("required")}
+                      text !== "" ? setPassWord(text) : console.log("required")
                     }}
                     
-                  />
-                <TextInput 
+                  /> 
+                  <TouchableOpacity 
+                  
+                    onPress={() => setShow(!show)}
+                    style = {{alignSelf : 'center'}}>
+                    <Icon 
+                      name = {show ? 'eye' : 'eye-slash'}  
+                      color = 'gray'
+                    />
+
+                  </TouchableOpacity></View>
+                  <View style = {{display : 'flex', flexDirection: 'row', justifyContent : 'space-between'}}>
+                  
+                  <TextInput 
                     placeholder = "Confirm Password" 
-                    secureTextEntry = {true} 
+                    secureTextEntry = {cshow} 
                     style = {style.input}
                     onChangeText={(text) => {
                       {text !== "" ? setConfirmPassWord(text) : console.log("required")}
                     }}
                     
                   />
+                  <TouchableOpacity 
+                  
+                    onPress={() => setcShow(!cshow)}
+                    style = {{alignSelf : 'center'}}>
+                    <Icon 
+                      name = {cshow ? 'eye' : 'eye-slash'}  
+                      color = 'gray'
+                    />
+
+                  </TouchableOpacity></View>
+                
 
             <CustomButton
               children="Sign Up"
               style = {style.button}
-              onPress={() => {
-                    validateEmail()
-                    setData({email, password,confirm_password})             
-                }}
+              onPress={handleSubmit}
                 
             />
           </View>

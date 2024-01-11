@@ -1,16 +1,23 @@
-import {View, ScrollView, Text, TouchableOpacity} from 'react-native'
+import {View, ScrollView, Text, TouchableOpacity, Button} from 'react-native'
 import {useState, useEffect} from 'react'
+import { useNavigation } from '@react-navigation/native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import FontIcons from 'react-native-vector-icons/FontAwesome'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
-
 import Inputs from '../components/Inputs'
 
 import style from '../styles'
 
+
 function Threshold(){
 
-    useEffect(() => {console.log(data)}, [data])
+    const navigation = useNavigation()
+
+    const goToSign = () => {
+        navigation.navigate('signup')
+    }
+    
+
 
     const [wet, setWet] = useState(80)
     const [dry, setDry] = useState(40)
@@ -23,6 +30,7 @@ function Threshold(){
     useEffect(() => {console.log(data)}, [data])
 
     return <View style = {style.thresholdInterface}>
+
         <ScrollView>
         
         <Inputs 

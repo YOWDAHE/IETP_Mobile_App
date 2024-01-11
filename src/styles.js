@@ -60,6 +60,7 @@ const style = StyleSheet.create({
         backgroundColor : "#e2eafc",
         borderRadius : 10,
         paddingHorizontal : 10,
+        width : 285,
         // fontFamily : "Robot",
     },
     closeButton : {
@@ -76,14 +77,14 @@ const style = StyleSheet.create({
         marginVertical : 5,
         borderWidth : 0.5,
         borderRadius : 5,
-        borderColor : 'black',
+        borderColor : '#527853',
         backgroundColor : '#304D30'
        
     },
     thresholdInterface : {
         flex : 1,
         display : 'flex',
-        paddingVertical : 100,
+        // paddingVertical : 100,
         paddingHorizontal : 20,
         justifyContent : 'flex-start',
         backgroundColor : '#527853'

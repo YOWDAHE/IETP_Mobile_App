@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, Image, Modal} from 'react-native'
 import { useState } from 'react'
+import { useNavigation } from '@react-navigation/native'
 // import Google from '@mui/icons-material/Google';
 
 
@@ -11,7 +12,11 @@ import style from '../styles'
 
 const img = require('../../assets/plant.png')
 
-export default function App(){
+export default function Login(){
+
+    const nav = useNavigation()
+
+    
     
     const [isVisible, setVisible] = useState(false)
 
@@ -42,6 +47,7 @@ export default function App(){
             <SignUpForm style = {style} isVisible = {isVisible} setVisible = {setVisible} />
             </View>
            
+           <Text>Already Have an Account Login</Text>
         </View>
 
         
