@@ -2,8 +2,11 @@ import { Button, ImageBackground, StyleSheet, Text, TouchableOpacity, View } fro
 import React from 'react'
 import '../../assets/Images/matthew-smith-Rfflri94rs8-unsplash.jpg';
 import '../../assets/Images/teemu-paananen-OOE4xAnBhKo-unsplash.jpg';
+import { useSelector } from 'react-redux';
 
 export default function Home({ navigation }) {
+  const { temp, soilHumidity, airHumidity } = useSelector((state) => state.appSlice);
+
   const day = new Date().toLocaleString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
   const dayParts = day.split(',');
   return (
@@ -19,7 +22,7 @@ export default function Home({ navigation }) {
             >
               <View style={{ height: '100%', flexDirection: 'column', justifyContent: 'flex-end', padding: 20 }}>
                 <View>
-                  <Text style={{ color: 'white', fontSize: 40, opacity: .7 }}>30°C</Text>
+                  <Text style={{ color: 'white', fontSize: 40, opacity: .7 }}>{temp}°C</Text>
                   <Text style={{ color: 'white', fontSize: 20, opacity: .6, marginLeft: 0, marginTop: -7 }}>Tempurature</Text>
                 </View>
               </View>
@@ -61,7 +64,7 @@ export default function Home({ navigation }) {
         >
           <View style={{ height: '100%', flexDirection: 'column', justifyContent: 'flex-start', padding: 20 }}>
             <View>
-              <Text style={{ color: 'white', fontSize: 35, opacity: .7 }}>60%</Text>
+              <Text style={{ color: 'white', fontSize: 35, opacity: .7 }}>{ soilHumidity }%</Text>
               <Text style={{ color: 'white', fontSize: 20, opacity: .6, marginLeft: 2, marginTop: -7 }}>Soil Humidity</Text>
             </View>
           </View>
