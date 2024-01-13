@@ -9,25 +9,14 @@ import CustomButton from '../components/CustomButton'
 import Home from "../screens/Home"
 
 
-export default function SignUpForm({style, isVisible, setVisible}){    
-
-  const storeData = async (key, value) => {
-    try {
-      await AsyncStorage.setItem(key, value);
-      console.log('Data stored successfully.')
-    }catch (error){
-      console.log("Error storing data : ", error)
-    }
-  }
+export default function LoginForm({style, isVisible, setVisible}){    
 
   const navigation = useNavigation()
   
   const [show, setShow] = useState(true)
-  const [cshow, setcShow] = useState(true)
   const [data, setData] = useState({})
   const [email, setEmail] = useState('')
   const [password, setPassWord] = useState('')
-  const [confirm_password, setConfirmPassWord] = useState('')
 
   const validateEmail = () => {
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
@@ -38,33 +27,61 @@ export default function SignUpForm({style, isVisible, setVisible}){
     } else {
       console.log(email)
       Alert.alert("invalid email")
-      return False
+      return false
     }
 
   }
 
-
-  const validatePassword = () => {
-    const passwordPattern = /^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8,}$/
-
-    if (!passwordPattern.test(password)){
-      Alert.alert("Invalid Password, Try again")
-      return false
+  const retrieveData = async (key) => {
+    try {
+        const value = await AsyncStorage.getItem(key)
+        if (value !== null){
+            console.log('Retrived data:', value)
+            return value
+        }else {
+            console.log('No data with the specified key')
+            return ""
+        }
+    }catch (error){
+        console.log('Error', error)
     }
-
-    if (password !== confirm_password){
-      Alert.alert("Passwords do not match, Please confirm it again")
-      return false
-    }
-
-    return true
   }
+
+  const removeData = async (key) => {
+    try {
+        await AsyncStorage.removeItem(key)
+        console.log("Data removed successfully")
+    }catch(error){
+        console.log("Error removing data", error)
+    }
+  }
+
+  const validatePassword =  () => {
+    // retrieveData(email).then((data)=>console.log(data))
+    try{
+    const storedData =  String(retrieveData(email))
+      if (password === storedData){
+        return true
+      }else{
+        console.log(password)
+        Alert.alert("Passwords do not match, Please confirm it again")
+        return false
+      }
+  } catch (error){
+    console.log("Error")
+    return false
+  }
+
+} 
+
 
   const handleSubmit = () => {
+    console.log("pass", validatePassword() )
+    console.log("email,", validateEmail() )
       
       if (validatePassword() && validateEmail()){
+        console.log(validatePassword() && validateEmail())
         setData({email, password}) 
-        storeData(email,password)
         navigation.navigate('Home')
       }
                   
@@ -89,7 +106,7 @@ export default function SignUpForm({style, isVisible, setVisible}){
               </TouchableOpacity>
             </View>
             
-            <Text style = {[style.title,style.inside ]}>Sign Up</Text>
+            <Text style = {[style.title,style.inside ]}>Log in</Text>
             
                 <TextInput  
                     placeholder="Email" 
@@ -105,9 +122,7 @@ export default function SignUpForm({style, isVisible, setVisible}){
                     placeholder = "Password" 
                     secureTextEntry = {show} 
                     style = {style.input}
-                    onChangeText={(text) => {
-                      text !== "" ? setPassWord(text) : console.log("required")
-                    }}
+                    onChangeText={(text) => setPassWord(text)}
                     
                   /> 
                   <TouchableOpacity 
@@ -122,31 +137,14 @@ export default function SignUpForm({style, isVisible, setVisible}){
                   </TouchableOpacity></View>
                   <View style = {{display : 'flex', flexDirection: 'row', justifyContent : 'space-between'}}>
                   
-                  <TextInput 
-                    placeholder = "Confirm Password" 
-                    secureTextEntry = {cshow} 
-                    style = {style.input}
-                    onChangeText={(text) => {
-                      {text !== "" ? setConfirmPassWord(text) : console.log("required")}
-                    }}
-                    
-                  />
-                  <TouchableOpacity 
-                  
-                    onPress={() => setcShow(!cshow)}
-                    style = {{alignSelf : 'center'}}>
-                    <Icon 
-                      name = {cshow ? 'eye' : 'eye-slash'}  
-                      color = 'gray'
-                    />
-
-                  </TouchableOpacity></View>
+                
+                  </View>
                 
 
             <CustomButton
-              children="Sign Up"
+              children="Login"
               style = {style.button}
-              onPress={handleSubmit}
+              onPress={()=> handleSubmit()}
                 
             />
           </View>

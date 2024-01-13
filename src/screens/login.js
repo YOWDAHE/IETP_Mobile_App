@@ -2,6 +2,7 @@ import { View, Text, StyleSheet, Image, Modal} from 'react-native'
 import { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 // import Google from '@mui/icons-material/Google';
+import LoginForm from '../components/LoginForm'
 
 
 
@@ -19,6 +20,7 @@ export default function Login(){
     
     
     const [isVisible, setVisible] = useState(false)
+    const [isLoginVisible, setLoginVisible] = useState(false)
 
     return <View
     style = {style.container}
@@ -29,25 +31,26 @@ export default function Login(){
         
         <View style = {style.div2}> 
             <View>
-                <Text style = {style.title}>Sign Up</Text>
+                <Text style = {style.title}>Welcome</Text>
             </View>
 
             <View>
             <CustomButton style = {style.button}
             onPress = {
-                () => console.log("First")
+                () => setLoginVisible(true)
+
             }            
             >
                 {/* <Google />  */}
-                <Text>Continue With Google</Text>
+                <Text>Login</Text>
             </CustomButton>
-            <CustomButton children = "I'll Use Email Instead" style = {style.button}
+            <CustomButton children = "Create Account" style = {style.button}
             onPress = {
                 () => setVisible(true)}  />
             <SignUpForm style = {style} isVisible = {isVisible} setVisible = {setVisible} />
+            <LoginForm style = {style} isVisible = {isLoginVisible} setVisible = {setLoginVisible} />
             </View>
            
-           <Text>Already Have an Account Login</Text>
         </View>
 
         
