@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { NavigationContainer } from '@react-navigation/native';
 import Temputature from './Temputature';
 import Home from './Home';
+import SoilHumidity from './SoilHumidity';
 
 export default function HomeContainer() {
     const Stack = createNativeStackNavigator();
@@ -21,6 +22,19 @@ export default function HomeContainer() {
                   }
               }} />
               <Stack.Screen name="temp" component={Temputature} options={{
+                  animation: "slide_from_left", headerStyle: {
+                      backgroundColor: '#172A3A',
+                  },
+                  headerBackTitleStyle: {
+                      color: 'white'
+                  },
+                  headerTitleStyle: {
+                      color: 'white',
+                      fontSize: 20,
+                      fontWeight: '200',
+                  }
+              }} />
+              <Stack.Screen name="soil" component={SoilHumidity} options={{
                   animation: "slide_from_left", headerStyle: {
                       backgroundColor: '#172A3A',
                   },

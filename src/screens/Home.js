@@ -8,12 +8,13 @@ export default function Home({ navigation }) {
   const { temp, soilHumidity, airHumidity } = useSelector((state) => state.appSlice);
 
   const day = new Date().toLocaleString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+  
   const dayParts = day.split(',');
   return (
     <View style={styles.container}>
       {/* The temp, day and humidity display */}
       <View style={{ height: 400, width: '95%', marginTop: 20, flexDirection: 'row', gap: 10 }} >
-        <TouchableOpacity onPress={()=> navigation.navigate('temp')}>
+        <TouchableOpacity onPress={() => navigation.navigate('temp')}>
           <View style={{ height: '100%', flex: 1, borderRadius: 10 }}>
             <ImageBackground
               source={require('../../assets/Images/teemu-paananen-OOE4xAnBhKo-unsplash.jpg')}
@@ -40,6 +41,7 @@ export default function Home({ navigation }) {
             <Text style={{ color: 'white', fontSize: 10, opacity: .5, marginLeft: 0, }}>{dayParts[2]}</Text>
           </View>
           <View style={{ backgroundColor: 'gray', width: '100%', flex: 3, borderRadius: 10 }}>
+
             <ImageBackground
               source={require('../../assets/Images/david-emrich-Xlzx6sEoenQ-unsplash.jpg')}
               style={styles.backgroundImage}
@@ -57,18 +59,22 @@ export default function Home({ navigation }) {
       </View>
       {/* Soil Humidity display */}
       <View style={{ backgroundColor: 'white', width: '95%', height: 200, borderRadius: 10 }}>
-        <ImageBackground
-          source={require('../../assets/Images/gabriel-jimenez-jin4W1HqgL4-unsplash.jpg')}
-          style={styles.backgroundImage}
-          imageStyle={{ borderRadius: 10, borderColor: 'black', borderWidth: .4 }}
-        >
-          <View style={{ height: '100%', flexDirection: 'column', justifyContent: 'flex-start', padding: 20 }}>
-            <View>
-              <Text style={{ color: 'white', fontSize: 35, opacity: .7 }}>{ soilHumidity }%</Text>
-              <Text style={{ color: 'white', fontSize: 20, opacity: .6, marginLeft: 2, marginTop: -7 }}>Soil Humidity</Text>
-            </View>
+        <TouchableOpacity onPress={() => navigation.navigate('soil')}>
+          <View style={{ backgroundColor: 'white', width: '100%', height: 200, borderRadius: 10 }}>
+            <ImageBackground
+              source={require('../../assets/Images/gabriel-jimenez-jin4W1HqgL4-unsplash.jpg')}
+              style={styles.backgroundImage}
+              imageStyle={{ borderRadius: 10, borderColor: 'black', borderWidth: .4 }}
+            >
+              <View style={{ height: '100%', flexDirection: 'column', justifyContent: 'flex-start', padding: 20 }}>
+                <View>
+                  <Text style={{ color: 'white', fontSize: 35, opacity: .7 }}>{soilHumidity}%</Text>
+                  <Text style={{ color: 'white', fontSize: 20, opacity: .6, marginLeft: 2, marginTop: -7 }}>Soil Humidity</Text>
+                </View>
+              </View>
+            </ImageBackground>
           </View>
-        </ImageBackground>
+        </TouchableOpacity>
       </View>
     </View>
   )
