@@ -1,6 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import Login from "../screens/login";
+import Login from "../screens/Login";
 import Threshold from "../screens/thresholdInterface";
 import Report from "../screens/report";
 

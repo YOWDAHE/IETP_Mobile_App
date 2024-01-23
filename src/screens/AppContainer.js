@@ -7,9 +7,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 
 import { Ionicons } from '@expo/vector-icons';
-import Login from './login';
+import Login from './Login';
 import Home from './Home';
 import Functions from './Functions';
+import HomeContainer from './HomeContainer';
 
 const Tab = createBottomTabNavigator();
 export default function AppContainer() {
@@ -17,7 +18,7 @@ export default function AppContainer() {
     return (
         <NavigationContainer independent >
             <Tab.Navigator screenOptions={{ tabBarStyle: { backgroundColor: '#172A3A', borderTopWidth: 0 },  }}>
-               <Tab.Screen name="Home" component={Home}
+                <Tab.Screen name="Home" component={HomeContainer}
                     options={{
                         
                         tabBarShowLabel: false,
@@ -29,7 +30,8 @@ export default function AppContainer() {
                             color: 'white',
                             fontSize: 20,
                             fontWeight: '200',
-                        }
+                        },
+                        headerShown: false,
                 }} />
                 <Tab.Screen name="Functions" component={Functions}
                     options={{
