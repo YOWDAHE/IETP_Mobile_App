@@ -7,10 +7,15 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 
 import { Ionicons } from '@expo/vector-icons';
+import { Fontisto } from '@expo/vector-icons';
+
 import Login from './Login';
 import Home from './Home';
 import Functions from './Functions';
 import HomeContainer from './HomeContainer';
+import SoilManual from './SoilManual';
+
+import SoilContainer from './SoilContainer';
 
 const Tab = createBottomTabNavigator();
 export default function AppContainer() {
@@ -46,6 +51,23 @@ export default function AppContainer() {
                             fontWeight: '200'
                         }
                 }} />
+
+            <Tab.Screen name="Soil Container" component={SoilContainer}
+                    options={{
+                        
+                        tabBarShowLabel: false,
+                        tabBarIcon: ({ focused }) => focused ?<Fontisto name="island" size={24} color="white" />  : <Fontisto name="island" size={24} color="gray" />,
+                        animation: "slide_from_left", headerBackVisible: false, headerStyle: {
+                            backgroundColor: '#172A3A',
+                        },
+                        headerTitleStyle: {
+                            color: 'white',
+                            fontSize: 20,
+                            fontWeight: '200',
+                        },
+                        headerShown: false,
+                }} />
+                
             </Tab.Navigator>
         </NavigationContainer>
     )
