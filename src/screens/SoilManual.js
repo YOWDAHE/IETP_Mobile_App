@@ -1,6 +1,6 @@
 import {View, Text, StyleSheet, ScrollView,ImageBackground, TouchableOpacity} from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import { teal } from '@mui/material/colors'
+
 
 const SoilManual = () => {
     const navigation = useNavigation()

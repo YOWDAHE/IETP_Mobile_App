@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import { Ionicons } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
@@ -13,8 +13,7 @@ import Login from './Login';
 import Home from './Home';
 import Functions from './Functions';
 import HomeContainer from './HomeContainer';
-import SoilManual from './SoilManual';
-
+import NuitrientContainer from './NuitrientContainer';
 import SoilContainer from './SoilContainer';
 
 const Tab = createBottomTabNavigator();
@@ -57,6 +56,21 @@ export default function AppContainer() {
                         
                         tabBarShowLabel: false,
                         tabBarIcon: ({ focused }) => focused ?<Fontisto name="island" size={24} color="white" />  : <Fontisto name="island" size={24} color="gray" />,
+                        animation: "slide_from_left", headerBackVisible: false, headerStyle: {
+                            backgroundColor: '#172A3A',
+                        },
+                        headerTitleStyle: {
+                            color: 'white',
+                            fontSize: 20,
+                            fontWeight: '200',
+                        },
+                        headerShown: false,
+                }} />
+
+        <Tab.Screen name="Nuitrient Container" component={NuitrientContainer}
+                    options={{                        
+                        tabBarShowLabel: false,
+                        tabBarIcon: ({ focused }) => focused ?<FontAwesome name="leaf" size={24} color="white" />  : <FontAwesome name="leaf" size={24} color="gray" />,
                         animation: "slide_from_left", headerBackVisible: false, headerStyle: {
                             backgroundColor: '#172A3A',
                         },
